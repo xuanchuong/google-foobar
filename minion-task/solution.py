@@ -5,19 +5,21 @@ def solution(data, n):
         return data
     
     dataCountDir = {}
-    dataKey = []
     for i in data:
         count = dataCountDir.get(i)
         if count is not None:
             dataCountDir[i] = count + 1
         else:
-            dataKey.append(i)
             dataCountDir[i] = 1
 
-    for i in dataKey:
-        if dataCountDir[i] > n:
-            while data.count(i) > 0:
-                data.remove(i)
+    result = []
+    for i in data:
+        result.append(i)
+    
 
-    return data
+    for i in data:
+        if dataCountDir[i] > n:
+            result.remove(i)
+
+    return result
         
