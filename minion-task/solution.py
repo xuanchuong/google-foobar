@@ -14,9 +14,10 @@ def solution(data, n):
             dataKey.append(i)
             dataCountDir[i] = 1
 
-    clonedData = data
-    for i in clonedData:
+    for i in dataKey:
         if dataCountDir[i] > n:
-            data.remove(i)
+            while data.count(i) > 0:
+                data.remove(i)
+
     return data
         
