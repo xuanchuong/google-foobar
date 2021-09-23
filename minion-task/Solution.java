@@ -15,7 +15,7 @@ public class Solution {
         for (int countKey : data) {
             Integer countValue = dataCount.get(countKey);
             if (countValue == null) {
-                countValue = 1
+                countValue = Integer.valueOf(1);
             } else {
                 countValue += 1;
             }
