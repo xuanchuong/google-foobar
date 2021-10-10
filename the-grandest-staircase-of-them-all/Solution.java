@@ -16,11 +16,13 @@ public class Solution {
     }
 
     private static int calculate(CustomStack stack, int n, int count) {
+        System.out.println(stack);
         int stackTotal = stack.getTotal();
         if (stackTotal > n) {
             return count;
         }
         if (stackTotal == n) {
+            System.out.println("count");
             return count + 1;
         }
         if (stack.peek() <= 1) {
@@ -34,6 +36,10 @@ public class Solution {
             stack.pop();
         }
         return count;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Solution.solution(13));
     }
 }
 
