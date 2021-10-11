@@ -6,40 +6,59 @@ public class Solution {
         CustomStack stack = new CustomStack();
         int brick = n - 1;
         int count = 0;
-        while(brick >= 2) {
+        int min = findMin(n);
+        while(brick >= min) {
             stack.add(brick);
             brick -= 1;
-            count = calculate(stack, n, count);
+            count += calculate(stack, n);
             stack.pop();
         }
         return count;
     }
 
-    private static int calculate(CustomStack stack, int n, int count) {
+    private static int calculate(CustomStack stack, int n) {
         System.out.println(stack);
         int stackTotal = stack.getTotal();
         if (stackTotal > n) {
-            return count;
+            return n - stackTotal;
         }
         if (stackTotal == n) {
             System.out.println("count");
-            return count + 1;
+            return 1;
         }
         if (stack.peek() <= 1) {
-            return count;
+            return 0;
         }
-        int currentBrick = stack.peek();
-        while (currentBrick > 1) {
-            currentBrick -= 1;
+        int currentBrick = stack.peek() - 1;
+        int count = 0;
+        while (currentBrick >= 1) {
             stack.add(currentBrick);
-            count = calculate(stack, n, count);
+            int result = calculate(stack, n);
+            if (result >= 0) {
+                count += result;
+                currentBrick -= 1;
+            } else {
+                currentBrick += result;
+            }
             stack.pop();
         }
         return count;
     }
 
     public static void main(String[] args) {
-        System.out.println(Solution.solution(13));
+        System.out.println(Solution.solution(20));
+    }
+
+    private static int findMin(int n) {
+        int i = 1;
+        int sum = 1;
+        for (; i < n; i++) {
+            sum += i;
+            if (sum > n) {
+                return i;
+            }
+        }
+        return i;
     }
 }
 
